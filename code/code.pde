@@ -1,97 +1,13 @@
 class Scanner {
+  //Scanner Library for Yourein; Kuuga Yamazaki.
+  //https://github.com/Yourein/AC-Processing
+  
   String[]  buf;
 
   Scanner(String f) {
     buf = loadStrings(f);
   }
 
-  int[] readint(int line, int size) {
-    int[] res = new int[size];
-    int cur = 0;
-
-    int temp = 0;
-    for (int i = 0; i < buf[line].length(); i++) {
-      if (buf[line].charAt(i) == ' ' && cur < size) {
-        res[cur] = temp;
-        temp = 0;
-        cur++;
-      } 
-      else if (cur < size){
-        temp *= 10;
-        temp += (buf[line].charAt(i)-'0');
-      }
-    }
-    
-    if (cur < size){
-      res[cur] = temp;      
-    }
-
-    return res;
-  }
-  
-  ArrayList<Integer> readint(int line){
-    ArrayList<Integer> res = new ArrayList<Integer>();
-    int temp = 0;
-    
-    for (int i = 0; i < buf[line].length(); i++){
-      if (buf[line].charAt(i) == ' '){
-        res.add(temp);
-        temp = 0;
-      }
-      else{
-        temp *= 10;
-        temp += (buf[line].charAt(i)-'0');
-      }
-    }
-    
-    res.add(temp);
-    
-    return res;
-  }
-  
-  long[] readlong(int line, int size){
-    long[] res = new long[size];
-    int cur = 0;
-    
-    long temp = 0;
-    for (int i = 0; i < buf[line].length(); i++){
-      if (buf[line].charAt(i) == ' ' && cur < size){
-        res[cur] = temp;
-        temp = 0;
-        cur++;
-      }
-      else if (cur < size){
-        temp *= 10;
-        temp += (buf[line].charAt(i)-'0');
-      }
-    }
-    
-    if (cur < size){
-      res[cur] = temp;      
-    }
-    
-    return res;
-  }
-  
-  ArrayList<Long> readlong(int line){
-    ArrayList<Long> res = new ArrayList<Long>();
-    
-    long temp = 0;
-    for (int i = 0; i < buf[line].length(); i++){
-      if (buf[line].charAt(i) == ' '){
-        res.add(temp);
-        temp = 0;
-      }
-      else{
-        temp *= 10;
-        temp += (buf[line].charAt(i)-'0');
-      }
-    }
-    
-    res.add(temp);
-    return res;
-  } 
-  
   String[] readstring(int line, int size){
     String[] res = new String[size];
     int cur = 0;
@@ -122,6 +38,34 @@ class Scanner {
     
     if (!res.equals("")) res.add(temp);
     
+    return res;
+  }
+  
+  int[] readint(int line, int size){
+    int[] res = new int[size];
+    String[] temp = this.readstring(line, size);
+    for (int i = 0; i < size; i++) res[i] = Integer.parseInt(temp[i]);
+    return res;
+  }
+
+  ArrayList<Integer> readint(int line){
+    ArrayList<Integer> res = new ArrayList<Integer>();
+    ArrayList<String> temp = this.readstring(line);
+    for (String x : temp) res.add(Integer.parseInt(x));
+    return res;
+  }
+
+  long[] readlong(int line, int size){
+    long[] res = new long[size];
+    String[] temp = this.readstring(line, size);
+    for (int i = 0; i < size; i++) res[i] = Long.parseLong(temp[i]);
+    return res;
+  }
+
+  ArrayList<Long> readlong(int line){
+    ArrayList<Long> res = new ArrayList<Long>();
+    ArrayList<String> temp = this.readstring(line);
+    for (String x : temp) res.add(Long.parseLong(x));
     return res;
   }
   
